@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Ninja Gold</title>
+    {% load staticfiles %}
+    <link rel="stylesheet" href="{% static 'gold/css/style.css' %}" media="screen" title="no title" charset="utf-8">
+  </head>
+  <body>
+    <div id="wrapper">
+      <header>
+        <h3>Your Gold:</h3>
+        <h3 id="gold"> {{ request.session.wallet }}</h3>
+      </header>
+      <div class="location">
+      <form action='/farm' method='post'>
+        <h1>Farm</h1>
+        <h4>(earns 10-20 golds)</h4>
+        <form action='/farm' method='post'>
+        {% csrf_token %} 
+          <input type='submit' value='Find Gold!'>
+        </form>
+      </div>
+      <div class="location">
+        <h1>Cave</h1>
+        <h4>(earns 5-10 golds)</h4>
+        <form action='/cave' method='post'>
+        {% csrf_token %} 
+          <input type='submit' value='Find Gold!'>
+        </form>
+      </div>
+      <div class="location">
+        <h1>House</h1>
+        <h4>(earns 2-5 golds)</h4>
+        <form action='/house' method='post'>
+        {% csrf_token %} 
+          <input type='submit' value='Find Gold!'>
+        </form>
+      </div>
+      <div class="location">
+        <h1>Casino</h1>
+        <h4>(earns/takes 0-50 golds)</h4>
+        <form action='/casino' method='post'>
+        {% csrf_token %} 
+          <input type='submit' value='Find Gold!'>
+        </form>
+      </div>
+      <h3>Activities</h3>
+      <footer>
+        {% if request.session.activity %}
+          {% for x in request.session.activity %}
+            <li> {{ x }} </li>
+          {% endfor %}
+        {% endif %}
+      </footer>
+      <form id="reset" action='/reset' method='get'>
+        <input type='submit' value='Start Over!'>
+      </form>
+    </div>
+  </body>
+</html>
